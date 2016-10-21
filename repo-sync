@@ -15,7 +15,7 @@ usage(){
 
 list_files(){
 	REPO_DIR="$1"
-	find $REPO_DIR -type f -printf %P\n
+	find $REPO_DIR -type f -printf "%P\n"
 }
 
 do_status(){
@@ -69,7 +69,8 @@ do_system_update(){
 
 do_repo_update(){
 	TARGET_DIR="$1"
-	CMD="........."
+	list_files $TARGET_DIR >/tmp/listaFicheros
+	CMD="rsync -av --files-from=/tmp/listaFicheros / $TARGET_DIR"
 
 	echo "======================================================"
 	echo "Update from local repository to system: REPO => SYSTEM"
